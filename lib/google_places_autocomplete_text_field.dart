@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:google_places_autocomplete_text_field/model/place_details.dart';
@@ -330,27 +331,31 @@ class _GooglePlacesAutoCompleteTextFormFieldState
           },
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Flexible(child: Icon(Icons.location_on)),
-                  const SizedBox(width: 10),
-                  Flexible(
-                    child: Container(
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(Icons.location_on),
+                    const SizedBox(width: 10),
+                    Container(
                       padding: const EdgeInsets.all(10),
                       child: Text(
                         allPredictions[index].description!,
                         style: widget.predictionsStyle ?? widget.style,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.all(10),
                 child: Text(
-                  allPredictions[index].reference!,
+                    allPredictions[index].reference!,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    )
                 ),
               ),
 
