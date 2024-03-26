@@ -334,7 +334,7 @@ class _GooglePlacesAutoCompleteTextFormFieldState extends State<GooglePlacesAuto
                       Container(
                         padding: const EdgeInsets.all(10).copyWith(bottom: 0),
                         child: Text(
-                          allPredictions[index].description!,
+                          allPredictions[index].description ?? "",
                           style: widget.predictionsStyle ?? widget.style,
                         ),
                       ),
@@ -342,7 +342,7 @@ class _GooglePlacesAutoCompleteTextFormFieldState extends State<GooglePlacesAuto
                       Container(
                         padding: const EdgeInsets.all(10).copyWith(top: 0),
                         child: Text(
-                            allPredictions[index].structuredFormatting!.secondaryText!,
+                            allPredictions[index].structuredFormatting!.secondaryText ?? "",
                             style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 12,
