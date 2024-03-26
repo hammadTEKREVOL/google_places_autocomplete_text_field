@@ -322,34 +322,34 @@ class _GooglePlacesAutoCompleteTextFormFieldState extends State<GooglePlacesAuto
                 removeOverlay();
               }
             },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Flexible(child: Icon(Icons.location_on)),
-                    const SizedBox(width: 10),
-                    Flexible(
-                      child: Container(
+                Icon(Icons.location_on),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           allPredictions[index].description!,
                           style: widget.predictionsStyle ?? widget.style,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 1),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    allPredictions[index].structuredFormatting!.secondaryText!,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                    )
+                      const SizedBox(height: 5),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                            allPredictions[index].structuredFormatting!.secondaryText!,
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            )
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
