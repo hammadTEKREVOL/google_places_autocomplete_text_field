@@ -145,12 +145,10 @@ class GooglePlacesAutoCompleteTextFormField extends StatefulWidget {
   });
 
   @override
-  State<GooglePlacesAutoCompleteTextFormField> createState() =>
-      _GooglePlacesAutoCompleteTextFormFieldState();
+  State<GooglePlacesAutoCompleteTextFormField> createState() => _GooglePlacesAutoCompleteTextFormFieldState();
 }
 
-class _GooglePlacesAutoCompleteTextFormFieldState
-    extends State<GooglePlacesAutoCompleteTextFormField> {
+class _GooglePlacesAutoCompleteTextFormFieldState extends State<GooglePlacesAutoCompleteTextFormField> {
   final subject = PublishSubject<String>();
   OverlayEntry? _overlayEntry;
   List<Prediction> allPredictions = [];
@@ -163,10 +161,7 @@ class _GooglePlacesAutoCompleteTextFormFieldState
 
   @override
   void initState() {
-    subject.stream
-        .distinct()
-        .debounceTime(Duration(milliseconds: widget.debounceTime))
-        .listen(textChanged);
+    subject.stream.distinct().debounceTime(Duration(milliseconds: widget.debounceTime)).listen(textChanged);
 
     _focus = widget.focusNode ?? FocusNode();
 
@@ -245,8 +240,7 @@ class _GooglePlacesAutoCompleteTextFormFieldState
 
   Future<void> getLocation(String text) async {
     final prefix = widget.proxyURL ?? "";
-    String url =
-        "${prefix}https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=${widget.googleAPIKey}";
+    String url = "${prefix}https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=${widget.googleAPIKey}";
 
     if (widget.countries != null) {
       for (int i = 0; i < widget.countries!.length; i++) {
@@ -261,8 +255,7 @@ class _GooglePlacesAutoCompleteTextFormFieldState
     }
     final response = await _dio.get(url);
 
-    final subscriptionResponse =
-        PlacesAutocompleteResponse.fromJson(response.data);
+    final subscriptionResponse = PlacesAutocompleteResponse.fromJson(response.data);
 
     if (text.isEmpty) {
       allPredictions.clear();
@@ -314,56 +307,43 @@ class _GooglePlacesAutoCompleteTextFormFieldState
 
   Widget get _overlayChild {
     return ListView.builder(
-      padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      itemCount: allPredictions.length,
-      itemBuilder: (BuildContext context, int index) {
-        return InkWell(
-          onTap: () {
-            if (index < allPredictions.length) {
-              widget.itmClick!(allPredictions[index]);
-              if (!widget.isLatLngRequired) return;
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        itemCount: allPredictions.length,
+        itemBuilder: (BuildContext context, int index) {
+          return InkWell(
+            onTap: () {
+              if (index < allPredictions.length) {
+                widget.itmClick!(allPredictions[index]);
+                if (!widget.isLatLngRequired) return;
 
-              getPlaceDetailsFromPlaceId(allPredictions[index]);
+                getPlaceDetailsFromPlaceId(allPredictions[index]);
 
-              removeOverlay();
-            }
-          },
-          child: Column(
-            children: [
-              Expanded(
-                child: Row(
+                removeOverlay();
+              }
+            },
+            child: Column(
+              children: [
+                Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(Icons.location_on),
+                    Flexible(child: Icon(Icons.location_on)),
                     const SizedBox(width: 10),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        allPredictions[index].description!,
-                        style: widget.predictionsStyle ?? widget.style,
+                    Flexible(
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          allPredictions[index].reference!,
+                          style: widget.predictionsStyle ?? widget.style,
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 10),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                    allPredictions[index].reference!,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                    )
-                ),
-              ),
-
-            ],
-          ),
-        );
-      }
-    );
+              ],
+            ),
+          );
+        });
   }
 
   void removeOverlay() {
@@ -376,8 +356,7 @@ class _GooglePlacesAutoCompleteTextFormFieldState
   Future<void> getPlaceDetailsFromPlaceId(Prediction prediction) async {
     try {
       final prefix = widget.proxyURL ?? "";
-      final url =
-          "${prefix}https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=${widget.googleAPIKey}";
+      final url = "${prefix}https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=${widget.googleAPIKey}";
       final response = await _dio.get(
         url,
       );
@@ -394,13 +373,10 @@ class _GooglePlacesAutoCompleteTextFormFieldState
   }
 }
 
-PlacesAutocompleteResponse parseResponse(Map responseBody) =>
-    PlacesAutocompleteResponse.fromJson(responseBody as Map<String, dynamic>);
+PlacesAutocompleteResponse parseResponse(Map responseBody) => PlacesAutocompleteResponse.fromJson(responseBody as Map<String, dynamic>);
 
-PlaceDetails parsePlaceDetailMap(Map responseBody) =>
-    PlaceDetails.fromJson(responseBody as Map<String, dynamic>);
+PlaceDetails parsePlaceDetailMap(Map responseBody) => PlaceDetails.fromJson(responseBody as Map<String, dynamic>);
 
 typedef ItemClick = void Function(Prediction postalCodeResponse);
-typedef GetPlaceDetailswWithLatLng = void Function(
-    Prediction postalCodeResponse);
+typedef GetPlaceDetailswWithLatLng = void Function(Prediction postalCodeResponse);
 typedef OverlayContainer = Widget Function(Widget overlayChild);
