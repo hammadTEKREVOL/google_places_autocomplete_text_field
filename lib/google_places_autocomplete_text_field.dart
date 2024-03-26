@@ -315,25 +315,35 @@ class _GooglePlacesAutoCompleteTextFormFieldState
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       itemCount: allPredictions.length,
-      itemBuilder: (BuildContext context, int index) => InkWell(
-        onTap: () {
-          if (index < allPredictions.length) {
-            widget.itmClick!(allPredictions[index]);
-            if (!widget.isLatLngRequired) return;
+      itemBuilder: (BuildContext context, int index) {
+        return InkWell(
+          onTap: () {
+            if (index < allPredictions.length) {
+              widget.itmClick!(allPredictions[index]);
+              if (!widget.isLatLngRequired) return;
 
-            getPlaceDetailsFromPlaceId(allPredictions[index]);
+              getPlaceDetailsFromPlaceId(allPredictions[index]);
 
-            removeOverlay();
-          }
-        },
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          child: Text(
-            allPredictions[index].description!,
-            style: widget.predictionsStyle ?? widget.style,
+              removeOverlay();
+            }
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(Icons.location_on),
+              SizedBox(width: 10),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  allPredictions[index].description!,
+                  style: widget.predictionsStyle ?? widget.style,
+                ),
+              ),
+            ],
           ),
-        ),
-      ),
+          )
+        );
+      }
     );
   }
 
