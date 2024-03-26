@@ -332,7 +332,7 @@ class _GooglePlacesAutoCompleteTextFormFieldState extends State<GooglePlacesAuto
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10).copyWith(bottom: 0),
                         child: Text(
                           allPredictions[index].description!,
                           style: widget.predictionsStyle ?? widget.style,
@@ -340,7 +340,7 @@ class _GooglePlacesAutoCompleteTextFormFieldState extends State<GooglePlacesAuto
                       ),
                       const SizedBox(height: 5),
                       Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10).copyWith(top: 0),
                         child: Text(
                             allPredictions[index].structuredFormatting!.secondaryText!,
                             style: const TextStyle(
