@@ -328,20 +328,32 @@ class _GooglePlacesAutoCompleteTextFormFieldState
               removeOverlay();
             }
           },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+          child: Column(
             children: [
-              const Flexible(child: Icon(Icons.location_on)),
-              const SizedBox(width: 10),
-              Flexible(
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    allPredictions[index].description!,
-                    style: widget.predictionsStyle ?? widget.style,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Flexible(child: Icon(Icons.location_on)),
+                  const SizedBox(width: 10),
+                  Flexible(
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        allPredictions[index].description!,
+                        style: widget.predictionsStyle ?? widget.style,
+                      ),
+                    ),
                   ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  allPredictions[index].reference!,
                 ),
               ),
+
             ],
           ),
         );
