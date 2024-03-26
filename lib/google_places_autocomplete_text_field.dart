@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:google_places_autocomplete_text_field/model/place_details.dart';
@@ -325,7 +326,11 @@ class _GooglePlacesAutoCompleteTextFormFieldState extends State<GooglePlacesAuto
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(Icons.location_on_outlined),
+                // add asset svg
+                SvgPicture.asset(
+                  "assets/images/location_pin.svg",
+                ),
+
                 const SizedBox(width: 10),
                 Expanded(
                   child: Column(
