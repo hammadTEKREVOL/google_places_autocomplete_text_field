@@ -2,6 +2,7 @@ library google_places_autocomplete_text_field;
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -330,18 +331,19 @@ class _GooglePlacesAutoCompleteTextFormFieldState
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(Icons.location_on),
-              SizedBox(width: 10),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  allPredictions[index].description!,
-                  style: widget.predictionsStyle ?? widget.style,
+              const Flexible(child: Icon(Icons.location_on)),
+              const SizedBox(width: 10),
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    allPredictions[index].description!,
+                    style: widget.predictionsStyle ?? widget.style,
+                  ),
                 ),
               ),
             ],
           ),
-
         );
       }
     );
