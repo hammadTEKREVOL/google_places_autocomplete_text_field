@@ -323,6 +323,7 @@ class _GooglePlacesAutoCompleteTextFormFieldState extends State<GooglePlacesAuto
               }
             },
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
