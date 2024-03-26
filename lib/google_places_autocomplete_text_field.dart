@@ -327,18 +327,29 @@ class _GooglePlacesAutoCompleteTextFormFieldState extends State<GooglePlacesAuto
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Flexible(child: Icon(Icons.location_on)),
+                    const Flexible(child: Icon(Icons.location_on)),
                     const SizedBox(width: 10),
                     Flexible(
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         child: Text(
-                          allPredictions[index].structuredFormatting!.mainText!,
+                          allPredictions[index].reference!,
                           style: widget.predictionsStyle ?? widget.style,
                         ),
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(height: 1),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    allPredictions[index].structuredFormatting!.secondaryText!,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    )
+                  ),
                 ),
               ],
             ),
