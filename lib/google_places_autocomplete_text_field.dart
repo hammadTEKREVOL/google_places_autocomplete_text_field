@@ -325,7 +325,7 @@ class _GooglePlacesAutoCompleteTextFormFieldState extends State<GooglePlacesAuto
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(Icons.location_on),
+                Icon(Icons.location_on_outlined),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Column(
