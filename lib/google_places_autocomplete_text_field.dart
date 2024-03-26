@@ -333,7 +333,7 @@ class _GooglePlacesAutoCompleteTextFormFieldState extends State<GooglePlacesAuto
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         child: Text(
-                          allPredictions[index].reference!,
+                          allPredictions[index].description!,
                           style: widget.predictionsStyle ?? widget.style,
                         ),
                       ),
